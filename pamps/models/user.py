@@ -8,4 +8,4 @@ class User(SQLModel, table=True):
     username: str = Field(unique=True, nullable=False)
     avatar: Optional[str] = None
     bio: Optional[str] = None
-    password: str = HashedPassword
+    password: HashedPassword
