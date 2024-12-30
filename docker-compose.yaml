@@ -8,7 +8,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      PAMPS_DB__uri: "postgresql://postgres:postgres@db:5433/${PAMPS_DB:-pamps}"
+      PAMPS_DB__uri: "postgresql://postgres:postgres@db:5432/${PAMPS_DB:-pamps}"
       PAMPS_DB__connect_args: "{}"
     volumes:
       - .:/home/app/api
@@ -22,7 +22,7 @@ services:
     volumes:
       - $HOME/.postgres/pamps_db/data/postgresql:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
       - POSTGRES_DBS=pamps, pamps_test
       - POSTGRES_USER=postgres
