@@ -1,3 +1,4 @@
+import logging
 import typer
 from rich.console import Console
 from rich.table import Table
@@ -5,8 +6,11 @@ from sqlmodel import Session, select
 from .config import settings
 from .db import engine
 from .models import User
+from pamps.security import get_password_hash
 
 main = typer.Typer(name="Pamps CLI")
+
+logging.getLogger('passlib').setLevel(logging.ERROR)
 
 @main.command()
 def shell():
@@ -49,7 +53,7 @@ def user_list():
 def create_user(email: str, username: str, password: str):
     """Create user"""
     with Session(engine) as session:
-        user = User(email=email, username=username, password=password)
+        user = User(email=email, username=username, password=get_password_hash(password))
         session.add(user)
         session.commit()
         session.refresh(user)
