@@ -5,7 +5,7 @@ from rich.table import Table
 from sqlmodel import Session, select
 from .config import settings
 from .db import engine
-from .models import User
+from .models import User, Post
 from pamps.security import get_password_hash
 
 main = typer.Typer(name="Pamps CLI")
@@ -21,6 +21,7 @@ def shell():
     "select": select,
     "session": Session(engine),
     "User": User,
+    "Post" : Post,
     }
     typer.echo(f"Auto imports: {list(_vars.keys())}")
     try:
