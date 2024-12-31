@@ -1,7 +1,10 @@
-from sqlmodel import Field, SQLModel
-from typing import Optional
+from sqlmodel import Field, SQLModel, Relationship
+from typing import Optional, List, TYPE_CHECKING
 from pamps.security import HashedPassword
 from pydantic import BaseModel
+
+if TYPE_CHECKING:
+    from pamps.models.post import Post
 
 class User(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -10,6 +13,8 @@ class User(SQLModel, table=True):
     avatar: Optional[str] = None
     bio: Optional[str] = None
     password: HashedPassword
+    
+    posts: List["Post"] = Relationship(back_populates="user")
 
 class UserResponse(BaseModel):
     """Serializer for User Response"""
