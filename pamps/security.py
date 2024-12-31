@@ -27,7 +27,7 @@ class HashedPassword(str):
         yield cls.validate
         
     @classmethod
-    def validate(cls, v):
+    def validate(cls, v, s):
         """Accepts a plain text password and returns a hashed password."""
         if not isinstance(v, str):
             raise TypeError("string required")
