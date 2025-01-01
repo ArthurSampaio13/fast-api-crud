@@ -25,9 +25,9 @@ class Post(SQLModel, table=True):
     )
     replies: list["Post"] = Relationship(back_populates="parent")
     
-def __lt__(self, other):
-    """This enables post.replies.sort() to sort by date"""
-    return self.date < other.date
+    def __lt__(self, other):
+        """This enables post.replies.sort() to sort by date"""
+        return self.date < other.date
 
 class PostResponse(BaseModel):
     """Serializer for Post Response"""
